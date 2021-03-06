@@ -1,0 +1,261 @@
+...................activity.xml...............
+
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/Calculator"
+        android:layout_width="221dp"
+        android:layout_height="45dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="97dp"
+        android:layout_marginRight="97dp"
+        android:layout_marginBottom="517dp"
+        android:text="calculator" />
+
+    <EditText
+        android:id="@+id/First"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="185dp"
+        android:layout_marginRight="185dp"
+        android:layout_marginBottom="402dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name" />
+
+    <EditText
+        android:id="@+id/Second"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="187dp"
+        android:layout_marginRight="187dp"
+        android:layout_marginBottom="337dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name" />
+
+    <TextView
+        android:id="@+id/result"
+        android:layout_width="199dp"
+        android:layout_height="39dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="198dp"
+        android:layout_marginRight="198dp"
+        android:layout_marginBottom="274dp"
+        android:text="result" />
+
+    <Button
+        android:id="@+id/btnAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="302dp"
+        android:layout_marginRight="302dp"
+        android:layout_marginBottom="198dp"
+        android:onClick="doSum"
+        android:text="+" />
+
+    <Button
+        android:id="@+id/btnSub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="292dp"
+        android:layout_marginRight="292dp"
+        android:layout_marginBottom="112dp"
+        android:onClick="doSub"
+        android:text="-" />
+
+    <Button
+        android:id="@+id/btnMul"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="28dp"
+        android:layout_marginRight="28dp"
+        android:layout_marginBottom="199dp"
+        android:onClick="doMul"
+        android:text="*" />
+
+    <Button
+        android:id="@+id/btnDiv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="175dp"
+        android:layout_marginRight="175dp"
+        android:layout_marginBottom="199dp"
+        android:onClick="doSub"
+        android:text="/" />
+
+    <Button
+        android:id="@+id/btnMod"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginBottom="114dp"
+        android:onClick="doMod"
+        android:text="%(MOD)" />
+
+    <Button
+        android:id="@+id/btnPow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="163dp"
+        android:layout_marginRight="163dp"
+        android:layout_marginBottom="115dp"
+        android:onClick="doPow"
+        android:text="(N1^N2)" />
+</RelativeLayout>
+
+
+.....................................activity.java.........................
+
+package com.example.calculator;
+
+
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
+public class MainActivity extends AppCompatActivity {
+    EditText e1, e2;
+    TextView res;
+    int num1, num2;
+    @Override
+    protected void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+    }
+    // a public method to get the input numbers
+    public boolean getNumbers()
+    {
+        // defining the edit text 1 to e1
+        e1 = (EditText)findViewById(R.id.First);
+
+        // defining the edit text 2 to e2
+        e2 = (EditText)findViewById(R.id.Second);
+
+        // defining the text view to t1
+        res = (TextView)findViewById(R.id.result);
+
+        // taking input from text box 1
+        String s1 = e1.getText().toString();
+        // taking input from text box 2
+        String s2 = e2.getText().toString();
+
+        // condition to check if box is not empty
+        if ((s1.equals(null) && s2.equals(null))
+                || (s1.equals("") && s2.equals(""))) {
+
+            String result = "Please enter a value";
+            res.setText(result);
+
+            return false;
+        }
+        else {
+            // converting string to int.
+            num1 = Integer.parseInt(e1.getText().toString());
+
+            // converting string to int.
+            num2 = Integer.parseInt(e2.getText().toString());
+        }
+
+        return true;
+    }
+    // a public method to perform addition
+    public void doSum(View v)
+    {
+        // get the input numbers
+        if (getNumbers()) {
+            int sum = num1 + num2;
+            res.setText(Integer.toString(sum));
+        }
+    }
+    // a public method to perform power function
+    public void doPow(View v)
+    {
+        // get the input numbers
+        if (getNumbers()) {
+            double sum = Math.pow(num1, num2);
+            res.setText(Double.toString(sum));
+        }
+    }
+    // a public method to perform subtraction
+    public void doSub(View v)
+    {
+        // get the input numbers
+        if (getNumbers()) {
+            int sum = num1 - num2;
+            res.setText(Integer.toString(sum));
+        }
+    }
+    // a public method to perform multiplication
+    public void doMul(View v)
+    {
+        // get the input numbers
+        if (getNumbers()) {
+            int sum = num1 * num2;
+            res.setText(Integer.toString(sum));
+        }
+    }
+    // a public method to perform Division
+    public void doDiv(View v)
+    {
+        // get the input numbers
+        if (getNumbers()) {
+            // displaying the text in text view assigned as t1
+            double sum = num1 / (num2 * 1.0);
+            res.setText(Double.toString(sum));
+        }
+    }
+    // a public method to perform modulus function
+    public void doMod(View v)
+    {
+        // get the input numbers
+        if (getNumbers()) {
+            double sum = num1 % num2;
+            res.setText(Double.toString(sum));
+        }
+    }
+}
+
+
+
+

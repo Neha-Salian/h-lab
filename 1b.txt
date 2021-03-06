@@ -1,0 +1,121 @@
+........................activity.java............
+
+package com.example.mediaplayer;
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.media.MediaPlayer;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
+public class MainActivity extends AppCompatActivity {
+    Button play, pause, stop, forward, rewind;
+    MediaPlayer mplayer;
+    int startime = 0;
+    int endtime = 0;
+    int ftime = 5000;
+    int btime = 5000;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        play = findViewById(R.id.play);
+        pause = findViewById(R.id.pause);
+        stop = findViewById(R.id.stop);
+        forward = findViewById(R.id.forward);
+        rewind = findViewById(R.id.rewind);
+        mplayer = MediaPlayer.create(this, R.raw.first);
+        play.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "Playing", Toast.LENGTH_SHORT).show();
+                mplayer.start();
+            }
+        });
+        pause.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "Media is paused",
+                        Toast.LENGTH_SHORT).show();
+                mplayer.pause();
+            }
+        });
+        stop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "Media is stopped",
+                        Toast.LENGTH_SHORT).show();
+                mplayer.stop();
+            }
+        });
+        forward.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int currentposition = mplayer.getCurrentPosition();
+                int overalltime = mplayer.getDuration();
+                if (currentposition + ftime < overalltime)
+                    mplayer.seekTo(currentposition + ftime);
+            }
+        });
+        rewind.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int currentposition = mplayer.getCurrentPosition();
+                int overalltime = mplayer.getDuration();
+                if (currentposition - btime != overalltime)
+                    mplayer.seekTo(currentposition - btime);
+            }
+        });
+    }
+} 
+
+..............................activity.xml..................
+
+<?xml version="1.0" encoding="utf-8"?>
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/pause"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="153dp"
+        android:layout_y="379dp"
+        android:text="PAUSE" />
+
+    <Button
+        android:id="@+id/stop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="302dp"
+        android:layout_y="378dp"
+        android:text="STOP" />
+
+    <Button
+        android:id="@+id/forward"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="79dp"
+        android:layout_y="487dp"
+        android:text="FORWARD" />
+
+    <Button
+        android:id="@+id/rewind"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="260dp"
+        android:layout_y="485dp"
+        android:text="REWIND" />
+
+    <Button
+        android:id="@+id/play"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="18dp"
+        android:layout_y="382dp"
+        android:text="PLAY" />
+</AbsoluteLayout>
